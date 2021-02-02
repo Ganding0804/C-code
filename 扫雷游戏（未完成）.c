@@ -75,7 +75,7 @@ void SetMine(char board[ROWS][COLS],int row,int col)
 int win=0;
 int get_mine_count(char mine[ROWS][COLS],int x,int y)
 {
-    win++;
+
     return mine[x-1][y-1]+mine[x-1][y]+mine[x-1][y+1]+
            mine[x][y-1]+mine[x][y+1]+
            mine[x+1][y-1]+mine[x+1][y]+mine[x+1][y+1]-8*'0';
@@ -111,9 +111,13 @@ void Spread(char mine[ROWS][COLS],char show[ROWS][COLS],int x,int y)
 
 		if ((x + 1)>0 && (y + 1)>0 && (show[x + 1][y + 1] == '*'))
 			Spread(mine, show, x + 1, y + 1);
+        win++;
     }
     else
+    {
         show[x][y]=count+'0';
+        win++;
+    }
 
 }
 
@@ -142,6 +146,7 @@ void FindMine(char mine[ROWS][COLS],char show[ROWS][COLS],int row,int col)
             {
                 //计算想x,y坐标周围有几个雷
                 Spread(mine,show,x,y);
+
                 DisplayBoard(show,row,col);
             }
         }
