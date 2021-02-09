@@ -50,7 +50,7 @@ int main()
 }
 */
 
-
+/*
 int main()
 {
     int a,b,c;
@@ -63,11 +63,164 @@ int main()
     printf("a = %d b = %d c = %d\n",a,b,c);
     return 0;
 }
+*/
 
+/*
+//找出一个数的二进制数中1的个数
+int Count(int a)
+{
+    int count=0;
+    //int i=0;
+    //for(i=0;i<32;i++)
+    //{
+    //    if(((a>>i)&1)==1)
+    //    {
+    //        count++;
+    //    }
+    //}
 
+    while(a)
+    {
+        a=a&(a-1);
+        count++;
+    }
+    //最高效算法
+    return count;
+}
 
+int main()
+{
+    int a=0;
+    printf("请输入数字：");
+    scanf("%d",&a);
+    int count=Count(a);
+    printf("count = %d\n",count);
+    return 0;
+}
+*/
 
+/*
+//比较两个数m、n的二进制数有多少位不相同
+int get_diff(int m,int n)
+{
+    int tmp=m^n;
+    int count=0;
+    while(tmp)
+    {
+        tmp=tmp&(tmp-1);
+        count++;
+    }
+    return count;
+}
 
+int main()
+{
+    int m=0;
+    int n=0;
+    scanf("%d %d",&m,&n);
+    int count=get_diff(m,n);
+    printf("有%d位不相同\n",count);
+    return 0;
+}
+*/
+/*
+//打印一个数的二进制数的奇数位和偶数位
+void print(int a)
+{
+    int i=0;
+    printf("奇数位：");
+    for(i=30;i>=0;i-=2)
+    {
+        printf("%d ",(a>>i)&1);
+    }
+    printf("\n");
+    printf("偶数位：");
+    for(i=31;i>=0;i-=2)
+    {
+        printf("%d ",(a>>i)&1);
+    }
+}
+
+int main()
+{
+    int a=0;
+    printf("请输入数字：");
+    scanf("%d",&a);
+    print(a);
+    return 0;
+}
+*/
+/*
+//用递归的方法逆置字符序列并打印出来
+int my_strlen(char *arr)
+{
+    int count=0;
+    while(*arr!='\0')
+    {
+        count++;
+        arr++;
+    }
+    return count;
+}
+
+void reverse_string(char arr[])
+{
+    int tmp=arr[0];
+    int len=my_strlen(arr);
+    arr[0]=arr[len-1];
+    arr[len-1]='\0';
+    if(my_strlen(arr+1)>=2)
+        reverse_string(arr+1);
+    arr[len-1]=tmp;
+}
+
+int main()
+{
+    char arr[]="abcdef";
+    reverse_string(arr);
+    printf("%s\n",arr);
+}
+*/
+/*
+//写一个递归函数DigitSum(n)，输入一个非负整数，返回组成它的数字之和
+int DigitSum(int a)
+{
+    if(a!=0)
+        return a%10+DigitSum(a/10);
+}
+
+int main()
+{
+    int a=0;
+    printf("请输入数字：");
+    scanf("%d",&a);
+    int sum=DigitSum(a);
+    printf("组成数字之和为%d\n",sum);
+    return 0;
+}
+*/
+
+//用一个递归函数计算n的k次方
+double Pow(int n,int k)
+{
+    if(k>0)
+        return n*Pow(n,k-1);
+    else if(k<0)
+        return (1.0/Pow(n,-k));
+    else
+        return 1;
+}
+
+int main()
+{
+    int n=0;
+    int k=0;
+    printf("请输入n和k的值：");
+    scanf("%d %d",&n,&k);
+    double ret=Pow(n,k);
+    printf("%d的%d次方计算结果为%lf\n",n,k,ret);
+    return 0;
+}
 
 
 
