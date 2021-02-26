@@ -111,7 +111,7 @@ int main()
     }
     return 0;
 }
-*/
+
 
 //数组指针 - 指向数组的指针
 int main()
@@ -130,11 +130,68 @@ int main()
     return 0;
 }
 
+int main()
+{
+    char* arr[5];
+    char* (*pa)[5]=&arr;
+    //char*表示pa指向的数组的元素类型是char*
+    //第二个*说明pa是指针，pa是指针变量的名字
+    //[5]表示怕指向的数组是含有5个元素的
+    return 0;
+}
 
+//参数是数组的形式
+void print1(int arr[3][5],int x,int y)
+{
+    int i=0;
+    int j=0;
+    for(i=0;i<x;i++)
+    {
+        for(j=0;j<y;j++)
+        {
+            printf("%d ",arr[i][j]);
+        }
+        printf("\n");
+    }
+}
+//参数是指针的形式
+void print2(int (*p)[5],int x,int y)
+{
+    int i=0;
+    int j=0;
+    for(i=0;i<x;i++)
+    {
+        for(j=0;j<y;j++)
+        {
+            printf("%d ",*(*(p+i)+j));
+            //其实arr[i]==*(arr+i)==*(p+i)==p[i]
+            //则*(*(p+i)+j)==*(p[i]+j)==p[i][j]
+        }
+        printf("\n");
+    }
+}
 
-
-
-
+int main()
+{
+    int arr[3][5]={{1,2,3,4,5},{2,3,4,5,6},{3,4,5,6,7}};
+    print1(arr,3,5);
+    printf("\n");
+    print2(arr,3,5); //把arr看作是一维数组，那么传过去所谓的首元素地址就是{1,2,3,4,5}的地址
+    return 0;
+}
+*/
+int main()
+{
+    int arr[5];
+    //arr是一个含有5个元素的整形数组
+    int *parr1[10];
+    //parr1是一个数组，数组中含有10个元素，每个元素都是int* - parr1是指针数组
+    int (*parr2)[10];
+    //parr2是一个指针，该指针指向一个含有10个元素的数组，数组每个元素类型是int - parr2是数组指针
+    int (*parr3[10])[5];
+    //parr3是一个数组，该数组含有10个元素，每个元素都是一个数组指针，该数组指针指向的数组含有5个元素，每个元素的类型是int
+    return 0;
+}
 
 
 
