@@ -53,13 +53,157 @@ void (*  signal(int , void(*)(int))  )(int);
 //简化
 typedef void(*pfun_t)(int);
 pfun_t signal(int,pfun_t);
-*/
+
 
 //函数指针数组
+int Add(int x,int y)
+{
+    return x+y;
+}
+int Sub(int x,int y)
+{
+    return x-y;
+}
+int Mul(int x,int y)
+{
+    return x*y;
+}
+int Div(int x,int y)
+{
+    return x/y;
+}
 int main()
 {
+    int (*pa)(int,int)=Add;//Sub,Mul,Div都可以存进这个指针
+    int (*parr[4])(int,int)={Add,Sub,Mul,Div};//函数指针数组
+    int i=0;
+    for(i=0;i<4;i++)
+    {
+        printf("%d\n",parr[i](4,2));//6,2,8,2
+    }
     return 0;
 }
+
+
+char* my_strcopy(char* dest,const char* src);
+//1.写一个函数指针 pf，能够指向my_strcopy
+    char* (*pf)(char*,const char*);
+//2.写一个函数指针数组 pfarr，能够存放四个my_strcopy函数的地址
+    char* (*pfarr[4])(char*,const char*);
+*/
+
+//计算器（函数指针数组用途 - 转移表）
+void menu()
+{
+    printf("**************   计算器   **************\n");
+    printf("*******     1.Add      2.Sub     *******\n");
+    printf("*******     3.Mul      4.Div     *******\n");
+    printf("*******           0.Exit         *******\n");
+    printf("****************************************\n");
+}
+int Add(int x,int y)
+{
+    return x+y;
+}
+int Sub(int x,int y)
+{
+    return x-y;
+}
+int Mul(int x,int y)
+{
+    return x*y;
+}
+int Div(int x,int y)
+{
+    return x/y;
+}
+
+int main()
+{
+    int input=0;
+    int x=0;
+    int y=0;
+    int (*pfArr[5])(int,int)={0,Add,Sub,Mul,Div};//函数指针数组
+    do
+    {
+        menu();
+        printf("请输入：\n");
+        scanf("%d",&input);
+        if(input>=1 && input<=4)
+        {
+            printf("请输入两个操作数：\n");
+            scanf("%d %d",&x,&y);
+            int ret=pfArr[input](x,y);
+            printf("%d\n",ret);
+        }
+        else if(input==0)
+        {
+            printf("退出计算器\n");
+        }
+        else
+        {
+            printf("输入错误，请重新输入！\n");
+        }
+    }while(input);
+    return 0;
+}
+/*
+int main()
+{
+    int input=0;
+    int x=0;
+    int y=0;
+    do
+    {
+        menu();
+        printf("请选择：\n");
+        scanf("%d",&input);
+
+        switch(input)
+        {
+        case 1:
+            printf("请输入数字：\n");
+            scanf("%d %d",&x,&y);
+            printf("%d\n",Add(x,y));
+            break;
+        case 2:
+            printf("请输入数字：\n");
+            scanf("%d %d",&x,&y);
+            printf("%d\n",Sub(x,y));
+            break;
+        case 3:
+            printf("请输入数字：\n");
+            scanf("%d %d",&x,&y);
+            printf("%d\n",Mul(x,y));
+            break;
+        case 4:
+            printf("请输入数字：\n");
+            scanf("%d %d",&x,&y);
+            printf("%d\n",Div(x,y));
+            break;
+        case 0:
+            printf("退出计算器\n");
+            break;
+        default:
+            printf("输入错误，请重新输入！\n");
+            break;
+        }
+    }while(input);
+}
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
